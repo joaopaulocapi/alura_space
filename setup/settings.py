@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'galeria',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'setup.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,7 +120,29 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
+# Usamos esta configuração para referência a arquivos 
+# estáticos localizados no STATIC_ROOT.
 STATIC_URL = 'static/'
+
+# STATICFILES_DIRS indica que todos os aqruivos estáticos
+# estão dentro dessa pasta
+'''
+Essa configuração define os locais adicionais que o 
+aplicativo Staticfiles percorrerá se o localizador 
+FileSystemFinder estiver ativado. Por exemplo, se 
+você usar o comando de gerenciamento collectstatic ou 
+findstatic, ou ainda a exibição de arquivo estático.
+'''
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'setup/static')
+]
+
+# STATIC_ROOT é o caminho absoluto para o diretório
+# oonde o python vai coloctar os arquivos estáticos 
+# para que sejam feito a manipulação de todos os arquivos estáticos
+# Usamos esta configuração para indicar o caminho absoluto, 
+# onde o collectstatic coletará os arquivos estáticos.
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
